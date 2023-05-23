@@ -18,7 +18,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await api.post(urls.REGISTER, inputs);
+      await api.post(urls.ENGREG, inputs);
       navigate(publicLinks.Login);
       toast.success("Account has been created");
     } catch (error) {
@@ -28,7 +28,7 @@ const Register = () => {
 
   return (
     <div className="auth">
-      <h1>Register</h1>
+      <h1>Engineers</h1>
       <form className="auth-form" action="">
         <input
           required
@@ -57,9 +57,6 @@ const Register = () => {
         {/* {err && <p>{err}</p>} */}
         <span>
           Do you have an account? <Link to="/login">Login</Link>
-        </span>
-        <span>
-          Register as an <Link to={publicLinks.EngRegister}>Engineer</Link>
         </span>
       </form>
     </div>

@@ -2,19 +2,24 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../authContext";
-import { useNavigate } from "react-router-dom";
 import { api } from "../api/axios";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { privateLinks } from "../constants/links";
+import { publicLinks } from "../constants/links";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const { user, tokens } = useContext(AuthContext);
-  const navigate = useNavigate();
   const [person, setPerson] = useState([]);
+  const [profile, SetProfile] = useState([]);
+  const { navigate } = useNavigate();
   const controller = new AbortController();
+
+  const userId = user.user_id;
 
   const fetchUser = async () => {
     try {
-      const response = await api.get(`me/${user.user_id}/`, {
+      const response = await api.get(`me/${userId}/`, {
         headers: {
           Authorization: `Bearer ${tokens.access}`,
         },
@@ -30,12 +35,69 @@ const Dashboard = () => {
     };
   }, []);
 
+  const fetchProfile = async () => {
+    try {
+      const response = await api.get(`profile/${userId}/`, {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      SetProfile(response.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchProfile();
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  function deleteAccount(id) {
+    try {
+      api.delete(`me/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      navigate(publicLinks.Landing, { replace: true });
+      toast.success("Account has been deleted");
+    } catch (error) {
+      toast.error("Cannot delete at the moment. Try again later");
+    }
+  }
+
   return (
-    <>
-      <div className="dashboard">
-        <h1>Welcome {person.username}</h1>
+    <div className="container">
+      <div className="card">
+        <div className="card-title">
+          <h2>Your Info</h2>
+        </div>
+
+        <div className="card-body">
+          <p>
+            <strong>Email: </strong>
+            {person.email}
+          </p>
+          <p>
+            <strong>Username: </strong>
+            {person.username}
+          </p>
+        </div>
+
+        <div className="card-buttons">
+          <Link to={privateLinks.Profile} className="card-btn">
+            Profile
+          </Link>
+          <button
+            onClick={() => deleteAccount(person.id)}
+            type="submit"
+            className="delete-button"
+          >
+            Delete Account
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

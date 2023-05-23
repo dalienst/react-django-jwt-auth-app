@@ -16,6 +16,9 @@ const Landing = () => {
         <Link className="land-link" to={publicLinks.Register}>
           Register
         </Link>
+        <Link className="land-link" to={publicLinks.EngRegister}>
+          Engineers
+        </Link>
       </div>
     </div>
   );
