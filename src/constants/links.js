@@ -7,7 +7,7 @@ const publicLinks = {
 
 const privateLinks = {
     Dashboard: '/dashboard',
-    Profile: '/profile'
+    Profile: '/profile',
 }
 
 const urls = {

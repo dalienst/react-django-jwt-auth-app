@@ -10,7 +10,7 @@ const Register = React.lazy(() => import("../pages/Register"));
 const EngRegister = React.lazy(() => import("../pages/EngRegister"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Dashboard = React.lazy(() => import("../pages/Dashboard"));
-const Profile = React.lazy(() => import("../pages/Profile"));
+const Profile = React.lazy(() => import("../pages/Profiles"));
 
 function BaseRouter() {
   return (

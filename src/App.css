@@ -173,6 +173,11 @@ li {
 .container {
     padding: 10px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 20px;
 }
 .card {
     border: 1px solid #000;
@@ -180,7 +185,9 @@ li {
     letter-spacing: 1px;
     background-color: #fff;
     border-radius: 8px;
-    width: 40%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 .card-title {
     font-weight: bolder;
@@ -194,9 +201,10 @@ li {
 .card-buttons {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
 }
 .delete-button {
     padding: 10px;
@@ -207,7 +215,8 @@ li {
     letter-spacing: 2px;
     color: #fff;
     font-weight: bold;
-    width: 180px;
+    width: auto;
+    cursor: pointer;
 }
 .btn {
     padding: 10px;
@@ -218,14 +227,164 @@ li {
     letter-spacing: 2px;
     color: #fff;
     font-weight: bold;
-    width: 180px;
+    width: auto;
+    cursor: pointer;
 }
 .card-btn{
     padding: 10px;
     border: 1px solid #000;
     text-decoration: none;
     text-align: center;
-    background-color: #b9e7e7;
-    color: #000;
-    width: 158px;
+    background-color: teal;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.home-link {
+    text-align: center;
+    font-size: 16px;
+}
+
+/* end */
+
+/* MODALS */
+.darkBG {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal {
+    width: 300px;
+    height: auto;
+    background: white;
+    color: white;
+    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+.modalHeader {
+    height: 50px;
+    background: white;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+.heading {
+    margin: 0;
+    padding: 10px;
+    color: black;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+.modalContent {
+    padding: 10px;
+    font-size: 14px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.modalActions {
+    position: absolute;
+    bottom: 2px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.actionsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.closeBtn {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+    color: #2c3e50;
+    background: white;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+    position: absolute;
+    right: 0;
+    top: 0;
+    align-self: flex-end;
+    margin-top: -7px;
+    margin-right: -7px;
+}
+.closeBtn:hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-4px, 4px);
+}
+
+.deleteBtn {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: none;
+    color: #fff;
+    background: #ff3e4e;
+    transition: all 0.25s ease;
+}
+
+.deleteBtn:hover {
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    transform: translateY(-5px);
+    background: #ff3e4e;
+}
+.cancelBtn {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: none;
+    color: #2c3e50;
+    background: #fcfcfc;
+    transition: all 0.25s ease;
+}
+
+.cancelBtn:hover {
+    box-shadow: none;
+    transform: none;
+    background: whitesmoke;
+}
+
+/* modal form dashboard*/
+.user-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.update-input {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.input-field-entry{
+    padding: 10px;
+    border: none;
+    border: 1px solid gray;
+    font-family: 'Instrument Serif', serif;
+    font-size: 15px;
 }

@@ -7,12 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { privateLinks } from "../constants/links";
 import { publicLinks } from "../constants/links";
 import { toast } from "react-toastify";
+import UserDetailModel from "../layouts/UserDetailModal";
 
 const Dashboard = () => {
   const { user, tokens } = useContext(AuthContext);
   const [person, setPerson] = useState([]);
   const [profile, SetProfile] = useState([]);
   const { navigate } = useNavigate();
+  const [open, setInOpen] = useState(false);
   const controller = new AbortController();
 
   const userId = user.user_id;
@@ -85,9 +87,10 @@ const Dashboard = () => {
         </div>
 
         <div className="card-buttons">
-          <Link to={privateLinks.Profile} className="card-btn">
-            Profile
-          </Link>
+          <button className="btn" onClick={() => setInOpen(true)}>
+            Update Details
+          </button>
+          {open && <UserDetailModel setInOpen={setInOpen} userdata={person} />}
           <button
             onClick={() => deleteAccount(person.id)}
             type="submit"
@@ -95,6 +98,9 @@ const Dashboard = () => {
           >
             Delete Account
           </button>
+          <Link to={privateLinks.Profile} className="home-link">
+            View Profile
+          </Link>
         </div>
       </div>
     </div>

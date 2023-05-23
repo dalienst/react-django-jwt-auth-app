@@ -4,11 +4,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../authContext";
 import { api } from "../api/axios";
 import ProfileModal from "../layouts/ProfileModal";
+import { Link } from "react-router-dom";
+import { privateLinks, publicLinks } from "../constants/links";
 
-const Profile = () => {
+export default function Profiles() {
   const { user, tokens } = useContext(AuthContext);
   const [profile, SetProfile] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const controller = new AbortController();
 
@@ -30,8 +32,6 @@ const Profile = () => {
       controller.abort();
     };
   }, []);
-  console.log(profile)
-
 
   return (
     <div className="container">
@@ -68,12 +68,16 @@ const Profile = () => {
         </div>
 
         <div className="card-buttons">
-          <button className="btn" onClick={() => setIsOpen(true)}>Update Profile</button>
-          {isOpen && <ProfileModal setIsOpen={setIsOpen} myprofile={profile} />}
+          <button className="btn" onClick={() => setOpen(true)}>
+            Update Profile
+          </button>
+          {isOpen && <ProfileModal setOpen={setOpen} myprofile={profile} />}
+        </div>
+
+        <div className="home-btn">
+          <Link to={privateLinks.Dashboard} className="home-link">Go Home</Link>
         </div>
       </div>
     </div>
   );
-};
-
-export default Profile;
+}
