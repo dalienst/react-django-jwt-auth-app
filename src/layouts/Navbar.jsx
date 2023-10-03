@@ -6,7 +6,7 @@ import { publicLinks } from "../constants/links";
 import { api } from "../api/axios";
 
 const Navbar = () => {
-  const { user, tokens } = useContext(AuthContext);
+  const { user, tokens, logout } = useContext(AuthContext);
   const [person, setPerson] = useState([]);
   const controller = new AbortController();
 
@@ -47,7 +47,7 @@ const Navbar = () => {
                   <h4>{person.is_engineer ? "Engineer" : "User"}</h4>
                 </li>
                 <li>
-                  <NavLink className="link" to={publicLinks.Landing}>
+                  <NavLink onClick={logout} className="link">
                     Logout
                   </NavLink>
                 </li>
