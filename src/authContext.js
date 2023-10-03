@@ -3,7 +3,6 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "./api/axios";
 import { urls } from "./constants/links";
-import jwtDecode from "./utils/jwt_decode";
 
 export const AuthContext = createContext();
 
@@ -16,15 +15,17 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => decodedToken);
     const [tokens, setTokens] = useState(() => onLoadTokens);
 
+
     const loginUser = async (inputs) => {
         const response = await axios.post(urls.LOGIN, inputs)
         setTokens(response.data);
-        const userID = jwtDecode(response.data.access);
+        const userID = jwt_decode(response.data.access);
         setUser(userID);
         localStorage.setItem("tokens", JSON.stringify(response.data));
     }
 
     const logout = () => {
+        localStorage.removeItem("tokens");
         setTokens(null);
         setUser(null);
     }

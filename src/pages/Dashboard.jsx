@@ -17,11 +17,14 @@ const Dashboard = () => {
   const [open, setInOpen] = useState(false);
   const controller = new AbortController();
 
-  const userId = user.user_id;
+  // const userId = user.user_id;
 
   const fetchUser = async () => {
+    if (!user?.user_id) {
+      return;
+    }
     try {
-      const response = await api.get(`me/${userId}/`, {
+      const response = await api.get(`me/${user?.user_id}/`, {
         headers: {
           Authorization: `Bearer ${tokens.access}`,
         },
@@ -32,14 +35,17 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchUser();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+    // return () => {
+    //   controller.abort();
+    // };
+  }, [user]);
 
   const fetchProfile = async () => {
+    if (!user?.user_id) {
+      return;
+    }
     try {
-      const response = await api.get(`profile/${userId}/`, {
+      const response = await api.get(`profile/${user?.user_id}/`, {
         headers: {
           Authorization: `Bearer ${tokens.access}`,
         },
@@ -49,10 +55,10 @@ const Dashboard = () => {
   };
   useEffect(() => {
     fetchProfile();
-    return () => {
-      controller.abort();
-    };
-  }, []);
+    // return () => {
+    //   controller.abort();
+    // };
+  }, [user]);
 
   function deleteAccount(id) {
     try {
